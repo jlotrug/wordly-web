@@ -2,11 +2,14 @@ import { useState } from "react"
 
 
 const Home = () => {
-    const [rowOne, setRowOne] = useState(["", "", "", "", "", ""])
-    const [rowTwo, setRowTwo] = useState(["", "", "", "", "", ""])
-    const [rowThree, setRowThree] = useState(["", "", "", "", "", ""])
-    const [rowFour, setRowFour] = useState(["", "", "", "", "", ""])
-    const [rowFive, setRowFive] = useState(["", "", "", "", "", ""])
+    const [rowValues, setRowValues] = useState({
+        0: ["", "", "", "", "", ""],
+        1: ["", "", "", "", "", ""],
+        2: ["", "", "", "", "", ""],
+        3: ["", "", "", "", "", ""],
+        4: ["", "", "", "", "", ""],    
+    })
+
     const [formData, setFormData] = useState({
         letterOne: "",
         letterTwo: "",
@@ -14,37 +17,23 @@ const Home = () => {
         letterFour: "",
         letterFive: ""
     })
+    const [rowOneClass, setRowOneClass] = useState("letter-present")
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
-    const [currentRow, setCurrentRow] = useState(1)
+    const [currentRow, setCurrentRow] = useState(0)
+    const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let currentGuess = [formData.letterOne, formData.letterTwo, formData.letterThree, formData.letterFour, formData.letterFive]
 
-        switch(currentRow){
-            case 1:
-                setRowOne(currentGuess)
-                break;
-            case 2:
-                setRowTwo(currentGuess)
-                break;
-            case 3:
-                setRowThree(currentGuess)
-                break;
-            case 4:
-                setRowFour(currentGuess)
-                break;
-            case 5:
-                setRowFive(currentGuess)
-                break;
-        }
+        setRowValues({...rowValues, [currentRow]: currentGuess})
         setCurrentRow(currentRow+1)
     }
 
     const onChange = (e) => {
         setFormData({
-            ...formData, [e.target.name]: e.target.value
+            ...formData, [e.target.name]: e.target.value.toUpperCase()
         })
     }
 
@@ -56,39 +45,39 @@ const Home = () => {
                 <table className="attempt-table">
                     <tbody>
                         <tr className="table-row">
-                            <td className="attempt-cell">{rowOne[0]}</td>
-                            <td className="attempt-cell">{rowOne[1]}</td>
-                            <td className="attempt-cell">{rowOne[2]}</td>
-                            <td className="attempt-cell">{rowOne[3]}</td>
-                            <td className="attempt-cell">{rowOne[4]}</td>
+                            <td className={`attempt-cell ` + rowOneClass} >{rowValues[0][0]}</td>
+                            <td className="attempt-cell">{rowValues[0][1]}</td>
+                            <td className="attempt-cell">{rowValues[0][2]}</td>
+                            <td className="attempt-cell">{rowValues[0][3]}</td>
+                            <td className="attempt-cell">{rowValues[0][4]}</td>
                         </tr>
                         <tr className="table-row">
-                            <td className="attempt-cell">{rowTwo[0]}</td>
-                            <td className="attempt-cell">{rowTwo[1]}</td>
-                            <td className="attempt-cell">{rowTwo[2]}</td>
-                            <td className="attempt-cell">{rowTwo[3]}</td>
-                            <td className="attempt-cell">{rowTwo[4]}</td>
+                            <td className={`attempt-cell ` + rowOneClass} >{rowValues[1][0]}</td>
+                            <td className="attempt-cell">{rowValues[1][1]}</td>
+                            <td className="attempt-cell">{rowValues[1][2]}</td>
+                            <td className="attempt-cell">{rowValues[1][3]}</td>
+                            <td className="attempt-cell">{rowValues[1][4]}</td>
                         </tr>
                         <tr className="table-row">
-                            <td className="attempt-cell">{rowThree[0]}</td>
-                            <td className="attempt-cell">{rowThree[1]}</td>
-                            <td className="attempt-cell">{rowThree[2]}</td>
-                            <td className="attempt-cell">{rowThree[3]}</td>
-                            <td className="attempt-cell">{rowThree[4]}</td>
+                            <td className={`attempt-cell ` + rowOneClass} >{rowValues[2][0]}</td>
+                            <td className="attempt-cell">{rowValues[2][1]}</td>
+                            <td className="attempt-cell">{rowValues[2][2]}</td>
+                            <td className="attempt-cell">{rowValues[2][3]}</td>
+                            <td className="attempt-cell">{rowValues[2][4]}</td>
                         </tr>
                         <tr>
-                            <td className="attempt-cell">{rowFour[0]}</td>
-                            <td className="attempt-cell">{rowFour[1]}</td>
-                            <td className="attempt-cell">{rowFour[2]}</td>
-                            <td className="attempt-cell">{rowFour[3]}</td>
-                            <td className="attempt-cell">{rowFour[4]}</td>
+                            <td className={`attempt-cell ` + rowOneClass} >{rowValues[3][0]}</td>
+                            <td className="attempt-cell">{rowValues[3][1]}</td>
+                            <td className="attempt-cell">{rowValues[3][2]}</td>
+                            <td className="attempt-cell">{rowValues[3][3]}</td>
+                            <td className="attempt-cell">{rowValues[3][4]}</td>
                         </tr>
                         <tr className="table-row">
-                            <td className="attempt-cell">{rowFive[0]}</td>
-                            <td className="attempt-cell">{rowFive[1]}</td>
-                            <td className="attempt-cell">{rowFive[2]}</td>
-                            <td className="attempt-cell">{rowFive[3]}</td>
-                            <td className="attempt-cell">{rowFive[4]}</td>
+                            <td className={`attempt-cell ` + rowOneClass} >{rowValues[4][0]}</td>
+                            <td className="attempt-cell">{rowValues[4][1]}</td>
+                            <td className="attempt-cell">{rowValues[4][2]}</td>
+                            <td className="attempt-cell">{rowValues[4][3]}</td>
+                            <td className="attempt-cell">{rowValues[4][4]}</td>
                         </tr>
 
                     </tbody>

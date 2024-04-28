@@ -21,6 +21,16 @@
     /* border: 5px solid black; */
 }
 
+td.letter-location-correct{
+    background-color: forestgreen;
+    /* color: whitesmoke; */
+}
+
+td.letter-present{
+    background-color: goldenrod;
+    /* color: whitesmoke; */
+}
+
 .attempt-cell{
     background-color: whitesmoke;
     height: 80px;
@@ -28,7 +38,8 @@
     /* margin-right: 2px; */
     border: 1px solid black;
     /* padding-right: 15px; */
-    font-size: 30px;
+    font-size: 40px;
+    font-weight: bold;
     text-align: center;
 }
 
