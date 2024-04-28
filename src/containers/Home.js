@@ -32,8 +32,9 @@ const Home = () => {
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
         for(let i=0; i<currentWord.length; i++){
-            console.log(currentWord.includes(currentGuess[i]));
-            if(currentWord.includes(currentGuess[i])){
+            if(currentWord[i] === currentGuess[i]){
+                updatedRowClasses[i] = "letter-location-correct"
+            }else if(currentWord.includes(currentGuess[i])){
                 console.log("Logic Works");
                 updatedRowClasses[i] = "letter-present"
             }
