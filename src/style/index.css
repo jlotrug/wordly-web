@@ -1,0 +1,44 @@
+.main-style{
+    background-color: bisque;
+    text-align: center;
+    min-height: 2000px;
+}
+
+.letter-input{
+    margin-top: 60px;
+}
+
+.attempt-table{
+    /* text-align: center; */
+    margin: 0 auto;
+    border-collapse:separate;
+    border-spacing: 0 1em;
+}
+
+.attempts{
+    /* text-align: center; */
+    /* margin: auto; */
+    /* border: 5px solid black; */
+}
+
+.attempt-cell{
+    background-color: whitesmoke;
+    height: 80px;
+    width: 80px;
+    /* margin-right: 2px; */
+    border: 1px solid black;
+    /* padding-right: 15px; */
+    font-size: 30px;
+    text-align: center;
+}
+
+.letter-input{
+    margin-right: 3px;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    text-align: center;
+}
+.table-row{
+    margin-top: 20px;
+}
