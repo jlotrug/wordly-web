@@ -1,5 +1,6 @@
 import { useState } from "react"
 import GameBoard from "./GameBoard"
+import GameForm from "./GameForm"
 
 
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
         letterFive: ""
     })
 
-    const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
+    // const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [currentRow, setCurrentRow] = useState(0)
     const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
 
@@ -69,52 +70,7 @@ const Home = () => {
         <div>
             <h1>Wordly</h1>
                 <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-
-            <div className="input-containers">
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        name="letterOne" 
-                        className="letter-input" 
-                        maxLength="1" 
-                        value={letterOne}
-                        onChange={onChange}
-                        />
-                    <input 
-                        type="text" 
-                        name="letterTwo" 
-                        className="letter-input" 
-                        maxLength="1" 
-                        value={letterTwo}
-                        onChange={onChange}
-                        />
-                    <input 
-                        type="text" 
-                        name="letterThree" 
-                        className="letter-input" 
-                        maxLength="1"
-                        value={letterThree}
-                        onChange={onChange} 
-                        />
-                    <input 
-                        type="text" 
-                        name="letterFour" 
-                        className="letter-input" 
-                        maxLength="1"
-                        value={letterFour} 
-                        onChange={onChange}
-                        />
-                    <input 
-                        type="text" 
-                        name="letterFive" 
-                        className="letter-input" 
-                        maxLength="1" 
-                        value={letterFive}
-                        onChange={onChange}
-                        /><br />
-                    <button className="btn" type="submit">Submit</button>
-                </form>
-            </div>
+                <GameForm onChange={onChange} formData={formData} handleSubmit={handleSubmit}/>
         </div>
     )
 }
