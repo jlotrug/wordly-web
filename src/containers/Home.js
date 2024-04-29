@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useRef, useState } from "react"
 import GameBoard from "./GameBoard"
 import GameForm from "./GameForm"
 
@@ -18,6 +18,7 @@ const Home = () => {
         3: ["", "", "", "", "", ""],
         4: ["", "", "", "", "", ""],    
     })
+    // const [inputFocus, setInputFocus] = useState([true, false, false, false, false])
 
     const [formData, setFormData] = useState({
         letterOne: "",
@@ -27,7 +28,6 @@ const Home = () => {
         letterFive: ""
     })
 
-    // const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [currentRow, setCurrentRow] = useState(0)
     const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
 
@@ -37,7 +37,6 @@ const Home = () => {
             if(currentWord[i] === currentGuess[i]){
                 updatedRowClasses[i] = "letter-location-correct"
             }else if(currentWord.includes(currentGuess[i])){
-                console.log("Logic Works");
                 updatedRowClasses[i] = "letter-present"
             }
         }
@@ -64,13 +63,14 @@ const Home = () => {
         setFormData({
             ...formData, [e.target.name]: e.target.value.toUpperCase()
         })
+        
     }
 
     return (
         <div>
             <h1>Wordly</h1>
                 <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-                <GameForm onChange={onChange} formData={formData} handleSubmit={handleSubmit}/>
+                <GameForm onChange={onChange} formData={formData} handleSubmit={handleSubmit} setFormData={setFormData}/>
         </div>
     )
 }
