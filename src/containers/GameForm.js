@@ -4,8 +4,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
     const [currentInput, setCurrentInput] = useState(0)
-    // const [currentInput, setCurrentInput] = useRef()
-    // const [letterOneFocus, letterTwoFocus, letterThreeFocus, letterFourFocus, letterFiveFocus] = useRef()
     const letterOneFocus = useRef()
     const letterTwoFocus = useRef()
     const letterThreeFocus = useRef()
@@ -65,9 +63,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
             case 3:
                 letterFiveFocus.current.focus()
                 break
-            // case 4:
-            //     letterFiveFocus.current.focus()
-            //     break
         }
     }
 
@@ -102,14 +97,18 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
         
     }
 
-    // const deletePreviousInput(){
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        setInputDisabled([false, true, true, true, true])
+        setCurrentInput(0)
+        handleSubmit(e)
 
-    // }
+    }
 
 
     return (
         <div className="input-containers">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleFormSubmit}>
                 <input 
                     type="text" 
                     name="letterOne" 
@@ -117,7 +116,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                     maxLength="1" 
                     value={letterOne}
                     onChange={onInputChange}
-                    // autoFocus={inputFocus[0]}
                     autoFocus
                     ref={letterOneFocus}
                     disabled= {inputDisabled[0]}
@@ -129,7 +127,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                     maxLength="1" 
                     value={letterTwo}
                     onChange={onInputChange}
-                    // autoFocus={inputFocus[1]}
                     ref={letterTwoFocus}
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[1]}
@@ -141,7 +138,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                     maxLength="1"
                     value={letterThree}
                     onChange={onInputChange} 
-                    // autoFocus={inputFocus[2]}
                     ref={letterThreeFocus}
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[2]}
@@ -153,7 +149,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                     maxLength="1"
                     value={letterFour} 
                     onChange={onInputChange}
-                    // autoFocus={inputFocus[3]}
                     ref={letterFourFocus}
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[3]}
@@ -165,7 +160,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                     maxLength="1" 
                     value={letterFive}
                     onChange={onInputChange}
-                    // autoFocus={inputFocus[4]}
                     ref={letterFiveFocus}
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[4]}
