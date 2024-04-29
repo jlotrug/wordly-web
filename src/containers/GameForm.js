@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 
-const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
+const GameForm = ({formData, handleSubmit, setFormData}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
     const [currentInput, setCurrentInput] = useState(0)
@@ -24,7 +24,10 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
             }
             setCurrentInput(currentInput+1)
         }
-        onChange(e)
+        setFormData({
+            ...formData, [e.target.name]: e.target.value.toUpperCase()
+        })
+        // onChange(e)
     }
 
     const handleKeyPress = (e) => {

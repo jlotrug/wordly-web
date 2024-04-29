@@ -59,18 +59,11 @@ const Home = () => {
         setCurrentRow(currentRow+1)
     }
 
-    const onChange = (e) => {
-        setFormData({
-            ...formData, [e.target.name]: e.target.value.toUpperCase()
-        })
-        
-    }
-
     return (
         <div>
             <h1>Wordly</h1>
                 <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-                <GameForm onChange={onChange} formData={formData} handleSubmit={handleSubmit} setFormData={setFormData}/>
+                <GameForm  formData={formData} handleSubmit={handleSubmit} setFormData={setFormData}/>
         </div>
     )
 }
