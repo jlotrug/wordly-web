@@ -12,6 +12,59 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
 
     useEffect(() => {
         console.log("Reach Effect");
+        handleFocus()
+    }, [JSON.stringify(inputDisabled)])
+
+    const onInputChange = (e) => {
+        if(e.target.value.length > 0){
+
+            if(currentInput < 4){
+                inputDisabled[currentInput+1] = false
+                inputDisabled[currentInput] = true
+            }
+            setCurrentInput(currentInput+1)
+        }
+        onChange(e)
+    }
+
+    const handleKeyPress = (e) => {
+        console.log(e.target.value);
+        if(e.keyCode === 8){
+
+            inputDisabled[currentInput] = true
+            inputDisabled[currentInput-1] = false
+
+            switch(currentInput){
+                case 1:
+                    setFormData({...formData, letterOne: ""})
+                    break
+                case 2:
+                    setFormData({...formData, letterTwo: ""})
+                    break
+                case 3:
+                    setFormData({...formData, letterThree: ""})
+                    break 
+                case 4:
+                    setFormData({...formData, letterFour: ""})
+                    break
+            }
+            
+            setCurrentInput(currentInput-1)
+        }
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        if(letterFive !== ""){
+            setInputDisabled([false, true, true, true, true])
+            setCurrentInput(0)
+            handleSubmit(e)
+        }else{
+            handleFocus()
+        }
+    }
+
+    const handleFocus = () => {
         switch(currentInput){
             case 0:
                 letterOneFocus.current.focus()
@@ -29,80 +82,6 @@ const GameForm = ({onChange, formData, handleSubmit, setFormData}) => {
                 letterFiveFocus.current.focus()
                 break
         }
-    }, [JSON.stringify(inputDisabled)])
-
-    const onInputChange = (e) => {
-        if(e.target.value.length > 0){
-
-            if(currentInput < 4){
-                inputDisabled[currentInput+1] = false
-                inputDisabled[currentInput] = true
-            }
-            
-            changeFocusForward(currentInput)
-            
-        }
-        onChange(e)
-    }
-
-    const changeFocusForward = (c) => {
-        setCurrentInput(c+1)
-        console.log("C: " + c);
-        console.log("CurrentInput: " + currentInput);
-        
-        switch(c){
-            case 0:
-                letterTwoFocus.current.focus()
-                break 
-            case 1:
-                letterThreeFocus.current.focus()
-                break
-            case 2:
-                letterFourFocus.current.focus()
-                break 
-            case 3:
-                letterFiveFocus.current.focus()
-                break
-        }
-    }
-
-    const handleKeyPress = (e) => {
-        console.log(e.target.value);
-        if(e.keyCode === 8){
-
-            inputDisabled[currentInput] = true
-            inputDisabled[currentInput-1] = false
-
-            switch(currentInput){
-                case 1:
-                    letterOneFocus.current.focus()
-                    setFormData({...formData, letterOne: ""})
-                    break
-                case 2:
-                    letterTwoFocus.current.focus()
-                    setFormData({...formData, letterTwo: ""})
-                    break
-                case 3:
-                    letterThreeFocus.current.focus()
-                    setFormData({...formData, letterThree: ""})
-                    break 
-                case 4:
-                    letterFourFocus.current.focus()
-                    setFormData({...formData, letterFour: ""})
-                    break
-            }
-            
-            setCurrentInput(currentInput-1)
-        }
-        
-    }
-
-    const handleFormSubmit = (e) => {
-        e.preventDefault()
-        setInputDisabled([false, true, true, true, true])
-        setCurrentInput(0)
-        handleSubmit(e)
-
     }
 
 

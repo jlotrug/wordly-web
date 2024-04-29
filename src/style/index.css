@@ -53,3 +53,9 @@ td.letter-present{
 .table-row{
     margin-top: 20px;
 }
+
+input:disabled{
+    /* color: white; */
+    /* background-color: forestgreen; */
+    background-color: white;
+}
