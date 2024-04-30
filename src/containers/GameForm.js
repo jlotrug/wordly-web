@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react"
 const GameForm = ({formData, handleSubmit, setFormData}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
+    const [inputStyle, setInputStyle] = useState(["", "", "", "", ""])
     const [currentInput, setCurrentInput] = useState(0)
     const letterOneFocus = useRef()
     const letterTwoFocus = useRef()
@@ -22,6 +23,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 inputDisabled[currentInput+1] = false
                 inputDisabled[currentInput] = true
             }
+            inputStyle[currentInput] = "letter-present"
             setCurrentInput(currentInput+1)
         }
         setFormData({
@@ -36,6 +38,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
 
             inputDisabled[currentInput] = true
             inputDisabled[currentInput-1] = false
+            inputStyle[currentInput] = ""
 
             switch(currentInput){
                 case 1:
@@ -94,7 +97,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 <input 
                     type="text" 
                     name="letterOne" 
-                    className="letter-input" 
+                    className={`letter-input ` + inputStyle[0]} 
                     maxLength="1" 
                     value={letterOne}
                     onChange={onInputChange}
@@ -105,7 +108,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 <input 
                     type="text" 
                     name="letterTwo" 
-                    className="letter-input" 
+                    className={`letter-input ` + inputStyle[1]} 
                     maxLength="1" 
                     value={letterTwo}
                     onChange={onInputChange}
@@ -116,7 +119,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 <input 
                     type="text" 
                     name="letterThree" 
-                    className="letter-input" 
+                    className={`letter-input ` + inputStyle[2]}  
                     maxLength="1"
                     value={letterThree}
                     onChange={onInputChange} 
@@ -127,7 +130,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 <input 
                     type="text" 
                     name="letterFour" 
-                    className="letter-input" 
+                    className={`letter-input ` + inputStyle[3]} 
                     maxLength="1"
                     value={letterFour} 
                     onChange={onInputChange}
@@ -138,7 +141,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                 <input 
                     type="text" 
                     name="letterFive" 
-                    className="letter-input" 
+                    className={`letter-input ` + inputStyle[4]}  
                     maxLength="1" 
                     value={letterFive}
                     onChange={onInputChange}
