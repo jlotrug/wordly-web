@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 
-const GameForm = ({formData, handleSubmit, setFormData}) => {
+const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
     const [inputStyle, setInputStyle] = useState(["", "", "", "", ""])
@@ -12,17 +12,20 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
     const letterFiveFocus = useRef()
 
     useEffect(() => {
-        console.log("Reach Effect");
+        // console.log("Reach Effect");
         handleFocus()
     }, [JSON.stringify(inputDisabled)])
 
     const onInputChange = (e) => {
+        // console.log("Changed");
+        // inputStyle[currentInput+1] = "letter-present"
         if(e.target.value.length > 0){
 
             if(currentInput < 4){
                 inputDisabled[currentInput+1] = false
                 inputDisabled[currentInput] = true
             }
+            console.log(currentInput);
             inputStyle[currentInput] = "letter-present"
             setCurrentInput(currentInput+1)
         }
@@ -33,16 +36,18 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
     }
 
     const handleKeyPress = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if(e.keyCode === 8){
 
             inputDisabled[currentInput] = true
             inputDisabled[currentInput-1] = false
             inputStyle[currentInput] = ""
-
+            // inputStyle[currentInput] = ""
+            console.log(currentInput);
             switch(currentInput){
                 case 1:
                     setFormData({...formData, letterOne: ""})
+                    inputStyle[0] = ""
                     break
                 case 2:
                     setFormData({...formData, letterTwo: ""})
@@ -57,6 +62,11 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
             
             setCurrentInput(currentInput-1)
         }
+        // else{
+        //     console.log("Reached key else");
+        //     inputStyle[currentInput+1] = "letter-present"
+        //     console.log(inputStyle);
+        // }
     }
 
     const handleFormSubmit = (e) => {
@@ -64,6 +74,7 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
         if(letterFive !== ""){
             setInputDisabled([false, true, true, true, true])
             setCurrentInput(0)
+            setInputStyle(["", "", "", "", ""])
             handleSubmit(e)
         }else{
             handleFocus()
@@ -149,7 +160,11 @@ const GameForm = ({formData, handleSubmit, setFormData}) => {
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[4]}
                     /><br />
-                <button className="btn" type="submit">Submit</button>
+                <button 
+                    className="btn" 
+                    type="submit"
+                    disabled={outOfTurnsFlag}
+                    >Submit</button>
             </form>
         </div>
     )

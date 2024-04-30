@@ -60,8 +60,13 @@ input:disabled{
     background-color: white;
 }
 
-input:disabled.letter-present{
-    color: white;
+input:disabled.letter-present{ 
+    color: white; 
     background-color: forestgreen;
     /* background-color: white; */
+}
+
+.letter-present{
+    color: white;
+    background-color: forestgreen;
 }

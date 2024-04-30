@@ -30,6 +30,7 @@ const Home = () => {
 
     const [currentRow, setCurrentRow] = useState(0)
     const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
+    const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
 
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
@@ -55,6 +56,7 @@ const Home = () => {
             letterFour: "",
             letterFive: ""
         })
+        if(currentRow === 4) setOutOfTurnsFlag(true)
         updateCellColors(currentGuess)
         setCurrentRow(currentRow+1)
     }
@@ -63,7 +65,7 @@ const Home = () => {
         <div>
             <h1>Wordly</h1>
                 <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-                <GameForm  formData={formData} handleSubmit={handleSubmit} setFormData={setFormData}/>
+                <GameForm  formData={formData} handleSubmit={handleSubmit} setFormData={setFormData} outOfTurnsFlag={outOfTurnsFlag}/>
         </div>
     )
 }
