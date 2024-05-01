@@ -12,9 +12,18 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
     const letterFiveFocus = useRef()
 
     useEffect(() => {
-        // console.log("Reach Effect");
         handleFocus()
+        // console.log(outOfTurnsFlag);
+        // if(!outOfTurnsFlag) handleFocus()
+        // else setInputDisabled([[true, true, true, true, true]])
     }, [JSON.stringify(inputDisabled)])
+
+    // useEffect(() => {
+    //     console.log("OOT Flag: " + outOfTurnsFlag);
+    //     console.log("Pre dis: " + inputDisabled);
+    //     if(outOfTurnsFlag) setInputDisabled([[true, true, true, true, true]])
+    //     console.log("Post dis: " + inputDisabled);
+    // }, [outOfTurnsFlag])
 
     const onInputChange = (e) => {
         // console.log("Changed");
@@ -25,7 +34,7 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
                 inputDisabled[currentInput+1] = false
                 inputDisabled[currentInput] = true
             }
-            console.log(currentInput);
+            // console.log(currentInput);
             inputStyle[currentInput] = "letter-present"
             setCurrentInput(currentInput+1)
         }
@@ -43,7 +52,7 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
             inputDisabled[currentInput-1] = false
             inputStyle[currentInput] = ""
             // inputStyle[currentInput] = ""
-            console.log(currentInput);
+            // console.log(currentInput);
             switch(currentInput){
                 case 1:
                     setFormData({...formData, letterOne: ""})
@@ -105,6 +114,7 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
     return (
         <div className="input-containers">
             <form onSubmit={handleFormSubmit}>
+                <fieldset disabled={outOfTurnsFlag}>
                 <input 
                     type="text" 
                     name="letterOne" 
@@ -163,8 +173,9 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag}) => {
                 <button 
                     className="btn" 
                     type="submit"
-                    disabled={outOfTurnsFlag}
+                    // disabled={outOfTurnsFlag}
                     >Submit</button>
+                    </fieldset>
             </form>
         </div>
     )
