@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import Keyboard from "./Keyboard"
 
-const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords}) => {
+const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords, gameOverMessage}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
     const [inputStyle, setInputStyle] = useState(["", "", "", "", ""])
@@ -12,6 +12,7 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords
     const letterFourFocus = useRef()
     const letterFiveFocus = useRef()
     const [warnings, setWarnings] = useState("")
+    const [formClass, setFormClass] = useState()
 
     useEffect(() => {
         handleFocus()
@@ -109,7 +110,7 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords
 
     return (
         <div className="input-form-container">
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit} className={!outOfTurnsFlag ? "" : "hide-content"}>
                 <fieldset disabled={outOfTurnsFlag}>
                     <input 
                         type="text" 
@@ -174,6 +175,9 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords
             </form>
             <div className="warnings">
                 {warnings}
+            </div>
+            <div className={outOfTurnsFlag ? "game-over-message" : "hide-content"}>
+                {gameOverMessage}
             </div>
         </div>
     )

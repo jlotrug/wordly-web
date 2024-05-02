@@ -34,18 +34,25 @@ const Home = () => {
     const [currentRow, setCurrentRow] = useState(0)
     const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
+    const [gameOverMessage, setGameOverMessage] = useState("")
 
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
+        let matches = 0;
         for(let i=0; i<currentWord.length; i++){
             if(currentWord[i] === currentGuess[i]){
                 updatedRowClasses[i] = "letter-location-correct"
                 currentMatches[i] = currentGuess[i]
+                matches++;
             }else if(currentWord.includes(currentGuess[i])){
                 updatedRowClasses[i] = "letter-present"
             }
         }
         setRowClasses({...rowClasses, [currentRow]: updatedRowClasses})
+        if(matches === 5){
+            setOutOfTurnsFlag(true)
+            setGameOverMessage("Good Job! The word was " + currentWord.join(""))
+        }
     }
 
     const handleSubmit = (e) => {
@@ -61,7 +68,10 @@ const Home = () => {
                 letterFour: "",
                 letterFive: ""
             })
-            if(currentRow === 4) setOutOfTurnsFlag(true)
+            if(currentRow === 4){
+                setOutOfTurnsFlag(true)
+                setGameOverMessage("Sorry! The word was " + currentWord.join(""))
+            } 
             updateCellColors(currentGuess)
             setCurrentRow(currentRow+1)
     }
@@ -84,6 +94,7 @@ const Home = () => {
                             setFormData={setFormData} 
                             outOfTurnsFlag={outOfTurnsFlag}
                             allWords={allWords}
+                            gameOverMessage={gameOverMessage}
                         />
                 </div>
                 <div className="col-md"></div>
