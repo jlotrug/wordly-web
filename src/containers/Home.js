@@ -21,7 +21,7 @@ const Home = () => {
         4: ["", "", "", "", "", ""],    
     })
     const [currentMatches, setCurrentMatches] = useState(["?", "?", "?", "?", "?"])
-    // const [inputFocus, setInputFocus] = useState([true, false, false, false, false])
+    const [allWords, setAllWords] = useState(["BLADE", "SPIKE", "STRAY", "TRADE"])
 
     const [formData, setFormData] = useState({
         letterOne: "",
@@ -52,17 +52,18 @@ const Home = () => {
         e.preventDefault()
         let currentGuess = [formData.letterOne, formData.letterTwo, formData.letterThree, formData.letterFour, formData.letterFive]
 
-        setRowValues({...rowValues, [currentRow]: currentGuess})
-        setFormData({
-            letterOne: "",
-            letterTwo: "",
-            letterThree: "",
-            letterFour: "",
-            letterFive: ""
-        })
-        if(currentRow === 4) setOutOfTurnsFlag(true)
-        updateCellColors(currentGuess)
-        setCurrentRow(currentRow+1)
+
+            setRowValues({...rowValues, [currentRow]: currentGuess})
+            setFormData({
+                letterOne: "",
+                letterTwo: "",
+                letterThree: "",
+                letterFour: "",
+                letterFive: ""
+            })
+            if(currentRow === 4) setOutOfTurnsFlag(true)
+            updateCellColors(currentGuess)
+            setCurrentRow(currentRow+1)
     }
 
     return (
@@ -70,8 +71,7 @@ const Home = () => {
             <div className="row">
                 <div className="col-md match-col">
                     <div className="current-matches">
-                    {/* <h1>Blade</h1> */}
-                    <CurrentMatches currentMatches={currentMatches}/>
+                        <CurrentMatches currentMatches={currentMatches}/>
                     </div>
                 </div>
                 <div className="col-md play-column">
@@ -83,9 +83,7 @@ const Home = () => {
                             handleSubmit={handleSubmit} 
                             setFormData={setFormData} 
                             outOfTurnsFlag={outOfTurnsFlag}
-                            rowValues={rowValues}
-                            setRowValues={setRowValues}
-                            currentRow={currentRow}
+                            allWords={allWords}
                         />
                 </div>
                 <div className="col-md"></div>
