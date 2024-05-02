@@ -1,12 +1,14 @@
+import FormRow from './FormRow'
 
-
-const GameBoard = ({rowClasses, rowValues}) => {
+const GameBoard = ({rowClasses, rowValues,  outOfTurnsFlag}) => {
 
     return (
         <div className="attempts">
             <table className="attempt-table">
                 <tbody>
                     <tr className="table-row">
+                       {/* <td className={`attempt-cell ` + rowClasses[1][0]} ><FormRow outOfTurnsFlag={outOfTurnsFlag} /></td> */}
+                       {/* <FormRow outOfTurnsFlag={outOfTurnsFlag} rowClasses={rowClasses} rowValues={rowValues} /> */}
                         <td className={`attempt-cell ` + rowClasses[0][0]}>{rowValues[0][0]}</td>
                         <td className={`attempt-cell ` + rowClasses[0][1]}>{rowValues[0][1]}</td>
                         <td className={`attempt-cell ` + rowClasses[0][2]}>{rowValues[0][2]}</td>

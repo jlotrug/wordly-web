@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react"
 import GameBoard from "./GameBoard"
 import GameForm from "./GameForm"
+import GameFormRetro from "./GameFormRetro"
+import CurrentMatches from "./CurrentMatches"
 
 
 const Home = () => {
@@ -18,6 +20,7 @@ const Home = () => {
         3: ["", "", "", "", "", ""],
         4: ["", "", "", "", "", ""],    
     })
+    const [currentMatches, setCurrentMatches] = useState(["?", "?", "?", "?", "?"])
     // const [inputFocus, setInputFocus] = useState([true, false, false, false, false])
 
     const [formData, setFormData] = useState({
@@ -37,6 +40,7 @@ const Home = () => {
         for(let i=0; i<currentWord.length; i++){
             if(currentWord[i] === currentGuess[i]){
                 updatedRowClasses[i] = "letter-location-correct"
+                currentMatches[i] = currentGuess[i]
             }else if(currentWord.includes(currentGuess[i])){
                 updatedRowClasses[i] = "letter-present"
             }
@@ -62,10 +66,30 @@ const Home = () => {
     }
 
     return (
-        <div>
-            <h1>Wordly</h1>
-                <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-                <GameForm  formData={formData} handleSubmit={handleSubmit} setFormData={setFormData} outOfTurnsFlag={outOfTurnsFlag}/>
+        <div className="container">
+            <div className="row">
+                <div className="col-md match-col">
+                    <div className="current-matches">
+                    {/* <h1>Blade</h1> */}
+                    <CurrentMatches currentMatches={currentMatches}/>
+                    </div>
+                </div>
+                <div className="col-md play-column">
+                    <h1>Wordly</h1>
+                        <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
+                        
+                        <GameForm  
+                            formData={formData} 
+                            handleSubmit={handleSubmit} 
+                            setFormData={setFormData} 
+                            outOfTurnsFlag={outOfTurnsFlag}
+                            rowValues={rowValues}
+                            setRowValues={setRowValues}
+                            currentRow={currentRow}
+                        />
+                </div>
+                <div className="col-md"></div>
+            </div>
         </div>
     )
 }

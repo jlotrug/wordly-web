@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect, useCallback } from "react"
 import Keyboard from "./Keyboard"
 
-const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValues, setRowValues, currentRow}) => {
+const GameFormRetro = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValues, setRowValues, currentRow, element=window}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
     const [inputDisabled, setInputDisabled] = useState([false, true, true, true, true])
     const [inputStyle, setInputStyle] = useState(["", "", "", "", ""])
@@ -14,23 +14,17 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValue
 
     useEffect(() => {
         handleFocus()
-        // console.log(outOfTurnsFlag);
-        // if(!outOfTurnsFlag) handleFocus()
-        // else setInputDisabled([[true, true, true, true, true]])
     }, [JSON.stringify(inputDisabled)])
-
-    // useEffect(() => {
-    //     console.log("OOT Flag: " + outOfTurnsFlag);
-    //     console.log("Pre dis: " + inputDisabled);
-    //     if(outOfTurnsFlag) setInputDisabled([[true, true, true, true, true]])
-    //     console.log("Post dis: " + inputDisabled);
-    // }, [outOfTurnsFlag])
 
     useEffect(() => {
         setRowValues({
             ...rowValues, [currentRow]: [letterOne, letterTwo, letterThree, letterFour, letterFive]
         })
     }, [formData])
+
+    useEffect(() => {
+        console.log("sjdhsjdh");
+    }, [element])
 
     const onInputChange = (e) => {
         // console.log("Changed");
@@ -78,12 +72,10 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValue
             }
             
             setCurrentInput(currentInput-1)
+        }else{
+            console.log(e);
         }
-        // else{
-        //     console.log("Reached key else");
-        //     inputStyle[currentInput+1] = "letter-present"
-        //     console.log(inputStyle);
-        // }
+
     }
 
     const handleFormSubmit = (e) => {
@@ -181,7 +173,8 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValue
                     ref={letterFiveFocus}
                     onKeyUp={handleKeyPress}
                     disabled= {inputDisabled[4]}
-                    /> <br />
+                    />
+                    <Keyboard />
                 <button 
                     className="btn submit-attempt-btn" 
                     type="submit"
@@ -192,4 +185,4 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, rowValue
     )
 }
 
-export default GameForm
+export default GameFormRetro

@@ -15,6 +15,12 @@
     border-spacing: 0 1em;
 }
 
+
+
+.match-table{
+    border: 2px solid black;
+}
+
 .attempts{
     /* text-align: center; */
     /* margin: auto; */
@@ -33,8 +39,10 @@ td.letter-present{
 
 .attempt-cell{
     background-color: whitesmoke;
-    height: 80px;
-    width: 80px;
+    /* height: 80px;
+    width: 80px; */
+    height: 70px;
+    width: 70px;
     /* margin-right: 2px; */
     border: 1px solid black;
     /* padding-right: 15px; */
@@ -43,15 +51,80 @@ td.letter-present{
     text-align: center;
 }
 
-.letter-input{
-    margin-right: 3px;
-    width: 80px;
+.keyboard-row {
+    /* border: 1 px solid black; */
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+
+.keyboard-key{
+    background-color: whitesmoke; 
+    display: inline-block; 
+    padding: 3px;
+    border: 1px solid black;
+    font-size: 20px;
+    width: 30px;
+    margin: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.spec-key{
+    width: 60px;
+    padding: .8;
+}
+
+tr.krow-2{
+    /* margin-top: 25px; */
+}
+
+.keyboard-container{
+    text-align: center;
+    margin: 30px;
+    /* border: 5px solid black; */
+    /* height: 150px */
+}
+
+.keyboard-table {
+    /* margin: 0 auto; */
+    /* border-collapse:separate; */
+    /* border-spacing: 0 1em; */
+    text-align: center
+}
+
+.match-cell{
+    /* background-color: whitesmoke; */
+    background: rgba(235, 6, 6, 0.15);
+    color: black;
     height: 80px;
+    width: 80px;
+    /* margin-right: 2px; */
+    /* border: 1px solid black; */
+    /* padding-right: 15px; */
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.letter-input{
+    margin-right: 2px;
+    margin-left: 2px;
+    width: 70px;
+    height: 70px; 
+    /* height: 40px; */
+    /* width: 40px; */
     font-size: 30px;
     text-align: center;
+    margin-top: 0;
+    /* display: none; */
 }
 .table-row{
     margin-top: 20px;
+}
+
+.play-column {
+    /* border: 5px solid black; */
+    text-align: center;
 }
 
 input:disabled{
@@ -69,4 +142,25 @@ input:disabled.letter-present{
 .letter-present{
     color: white;
     background-color: forestgreen;
+}
+
+.current-matches{
+    margin-top: 50px;
+    text-align: left;
+}
+
+.match-col{
+    /* border: 1px solid black; */
+    margin-left: 0;
+}
+
+.input-form-container{
+    /* border: 1px solid black; */
+}
+
+.submit-attempt-btn{
+    border: 1px solid black; 
+    margin-top: 10px;
+    /* display: inline; */
+    /* margin: 15px; */
 }
