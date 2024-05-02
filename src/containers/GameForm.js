@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react"
-import Keyboard from "./Keyboard"
 
 const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords, gameOverMessage}) => {
     const {letterOne, letterTwo, letterThree, letterFour, letterFive} = formData
@@ -12,18 +11,11 @@ const GameForm = ({formData, handleSubmit, setFormData, outOfTurnsFlag, allWords
     const letterFourFocus = useRef()
     const letterFiveFocus = useRef()
     const [warnings, setWarnings] = useState("")
-    const [formClass, setFormClass] = useState()
 
     useEffect(() => {
         handleFocus()
 
     }, [JSON.stringify(inputDisabled)])
-
-    // useEffect(() => {
-    //     setRowValues({
-    //         ...rowValues, [currentRow]: [letterOne, letterTwo, letterThree, letterFour, letterFive]
-    //     })
-    // }, [formData])
 
     const onInputChange = (e) => {
         if(e.target.value.length > 0){

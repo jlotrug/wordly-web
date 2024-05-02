@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import GameBoard from "./GameBoard"
 import GameForm from "./GameForm"
 import GameFormRetro from "./GameFormRetro"
 import CurrentMatches from "./CurrentMatches"
+import LettersTried from "./LettersTried"
+import Keyboard from "./Keyboard"
 
 
 const Home = () => {
@@ -20,6 +22,21 @@ const Home = () => {
         3: ["", "", "", "", "", ""],
         4: ["", "", "", "", "", ""],    
     })
+    const [allLettersTried, setAllLettersTried] = useState({
+        validLetters: [],
+        invalidLetters: []
+    })
+
+    // useEffect(() => {
+    //     let lettersTriedArray = []
+    //     for(let i=0; i<25; i++){
+    //         lettersTriedArray.push(
+    //             {letter:"", class: "letters-tried"}
+    //         )
+    //     }
+    //     setAllLettersTried(lettersTriedArray)
+    // }, [])
+
     const [currentMatches, setCurrentMatches] = useState(["?", "?", "?", "?", "?"])
     const [allWords, setAllWords] = useState(["BLADE", "SPIKE", "STRAY", "TRADE"])
 
@@ -38,16 +55,35 @@ const Home = () => {
 
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
+        let validLetters = []
+        let invalidLetters = []
         let matches = 0;
         for(let i=0; i<currentWord.length; i++){
             if(currentWord[i] === currentGuess[i]){
                 updatedRowClasses[i] = "letter-location-correct"
                 currentMatches[i] = currentGuess[i]
+                validLetters.push(currentGuess[i])
+                // setAllLettersTried({...allLettersTried, validLetters: [...allLettersTried.validLetters, currentGuess[i]]})
                 matches++;
             }else if(currentWord.includes(currentGuess[i])){
                 updatedRowClasses[i] = "letter-present"
+                // console.log("Letter Present: " + currentGuess[i]);
+                validLetters.push(currentGuess[i])
+            }else{
+                invalidLetters.push(currentGuess[i])
+                // console.log(allLettersTried);
+                // setAllLettersTried({...allLettersTried, invalidLetters: [...allLettersTried.invalidLetters, currentGuess[i]]})
             }
         }
+        // console.log(validLetters);
+        setAllLettersTried({
+            validLetters: [...allLettersTried.validLetters, ...validLetters],
+            invalidLetters: [...allLettersTried.invalidLetters, ...invalidLetters]
+        
+        })
+
+        // setAllLettersTried({...allLettersTried, validLetters: [...allLettersTried.validLetters, ...validLetters]})
+        // setAllLettersTried({...allLettersTried, invalidLetters: [...allLettersTried.invalidLetters, ...invalidLetters]})
         setRowClasses({...rowClasses, [currentRow]: updatedRowClasses})
         if(matches === 5){
             setOutOfTurnsFlag(true)
@@ -97,7 +133,11 @@ const Home = () => {
                             gameOverMessage={gameOverMessage}
                         />
                 </div>
-                <div className="col-md"></div>
+                <div className="col-md">
+                    {/* <LettersTried allLettersTried={allLettersTried}/> */}
+                    <Keyboard allLettersTried={allLettersTried}/>
+                    
+                </div>
             </div>
         </div>
     )
