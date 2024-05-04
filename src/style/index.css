@@ -71,7 +71,7 @@ td.letter-present{
 
 .spec-key{
     width: 60px;
-    padding: .8;
+    /* padding: 0; */
 }
 
 tr.krow-2{

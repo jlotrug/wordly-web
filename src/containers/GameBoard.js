@@ -41,6 +41,13 @@ const GameBoard = ({rowClasses, rowValues,  outOfTurnsFlag}) => {
                         <td className={`attempt-cell ` + rowClasses[4][3]}>{rowValues[4][3]}</td>
                         <td className={`attempt-cell ` + rowClasses[4][4]}>{rowValues[4][4]}</td>
                     </tr>
+                    <tr className="table-row">
+                        <td className={`attempt-cell ` + rowClasses[5][0]}>{rowValues[5][0]}</td>
+                        <td className={`attempt-cell ` + rowClasses[5][1]}>{rowValues[5][1]}</td>
+                        <td className={`attempt-cell ` + rowClasses[5][2]}>{rowValues[5][2]}</td>
+                        <td className={`attempt-cell ` + rowClasses[5][3]}>{rowValues[5][3]}</td>
+                        <td className={`attempt-cell ` + rowClasses[5][4]}>{rowValues[5][4]}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

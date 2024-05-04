@@ -13,14 +13,16 @@ const Home = () => {
         1: ["", "", "", "", "", ""],
         2: ["", "", "", "", "", ""],
         3: ["", "", "", "", "", ""],
-        4: ["", "", "", "", "", ""],    
+        4: ["", "", "", "", "", ""],
+        5: ["", "", "", "", "", ""],      
     })
     const [rowClasses, setRowClasses] = useState({
         0: ["", "", "", "", "", ""],
         1: ["", "", "", "", "", ""],
         2: ["", "", "", "", "", ""],
         3: ["", "", "", "", "", ""],
-        4: ["", "", "", "", "", ""],    
+        4: ["", "", "", "", "", ""],
+        5: ["", "", "", "", "", ""],    
     })
     const [allLettersTried, setAllLettersTried] = useState({
         validLetters: [],
@@ -42,6 +44,7 @@ const Home = () => {
     })
 
     const [currentRow, setCurrentRow] = useState(0)
+    const [currentInput, setCurrentInput] = useState(0)
     const [currentWord, setCurrentWord] = useState([])
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
     const [gameOverMessage, setGameOverMessage] = useState("")
@@ -52,11 +55,6 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        console.log(currentWord);
-    }, [currentWord])
-
-    useEffect(() => {
-        console.log(allWords.words);
         if(allWords.words.length > 0){
             let randomIndex = Math.floor(Math.random() * allWords.words.length)
             setCurrentWord(allWords.words[randomIndex].split(""))
@@ -100,24 +98,39 @@ const Home = () => {
         }
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        let currentGuess = [formData.letterOne, formData.letterTwo, formData.letterThree, formData.letterFour, formData.letterFive]
+    const updateLetterValue = (letter) => {
+        console.log(currentInput);
+        let currentGuess = rowValues[currentRow]
+        if(letter === "Delete"){
+            if(currentInput > 0){
+                setCurrentInput(currentInput-1)
+                currentGuess[currentInput-1] = ""
+                setRowValues({...rowValues, [currentRow]: currentGuess})
+            }
+        }else if(letter === "Enter"){
+            console.log("Enter Reached");
+            if(rowValues[currentRow][4] !== ""){
+                handleSubmit()
+            }
+            
+        }else{
+            if(currentInput < 5){
+                currentGuess[currentInput] = letter
+                setRowValues({...rowValues, [currentRow]: currentGuess})
+                setCurrentInput(currentInput+1)
+            }   
+        }
+    }
 
-        setRowValues({...rowValues, [currentRow]: currentGuess})
-        setFormData({
-            letterOne: "",
-            letterTwo: "",
-            letterThree: "",
-            letterFour: "",
-            letterFive: ""
-        })
+    const handleSubmit = () => {
+
         if(currentRow === 4){
             setOutOfTurnsFlag(true)
             setGameOverMessage("Sorry! The word was " + currentWord.join(""))
         } 
-        updateCellColors(currentGuess)
+        updateCellColors(rowValues[currentRow])
         setCurrentRow(currentRow+1)
+        setCurrentInput(0)
     }
 
     return (
@@ -131,22 +144,14 @@ const Home = () => {
                 <div className="col-md play-column">
                     <h1>Wordly</h1>
                         <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
-                        
-                        <GameForm  
-                            formData={formData} 
-                            handleSubmit={handleSubmit} 
-                            setFormData={setFormData} 
-                            outOfTurnsFlag={outOfTurnsFlag}
-                            allWords={allWords.words}
-                            gameOverMessage={gameOverMessage}
-                        />
-                </div>
-                <div className="col-md">
-                    <Keyboard 
+                        <Keyboard 
                         allLettersTried={allLettersTried}
                         setFormData={setFormData}
                         formData={formData}
+                        updateLetterValue={updateLetterValue}
                         />
+                </div>
+                <div className="col-md">
                 </div>
             </div>
         </div>
