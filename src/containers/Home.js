@@ -48,6 +48,7 @@ const Home = () => {
     const [currentWord, setCurrentWord] = useState([])
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
     const [gameOverMessage, setGameOverMessage] = useState("")
+    const [warnings, setWarnings] = useState("")
 
     useEffect(() => {
         FetchWords(dispatchAllWords, 5)
@@ -102,6 +103,7 @@ const Home = () => {
         console.log(currentInput);
         let currentGuess = rowValues[currentRow]
         if(letter === "Delete"){
+            setWarnings("")
             if(currentInput > 0){
                 setCurrentInput(currentInput-1)
                 currentGuess[currentInput-1] = ""
@@ -110,7 +112,7 @@ const Home = () => {
         }else if(letter === "Enter"){
             console.log("Enter Reached");
             if(rowValues[currentRow][4] !== ""){
-                handleSubmit()
+                handleSubmit(currentGuess)
             }
             
         }else{
@@ -122,15 +124,21 @@ const Home = () => {
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (currentGuess) => {
 
-        if(currentRow === 4){
-            setOutOfTurnsFlag(true)
-            setGameOverMessage("Sorry! The word was " + currentWord.join(""))
-        } 
-        updateCellColors(rowValues[currentRow])
-        setCurrentRow(currentRow+1)
-        setCurrentInput(0)
+        if(allWords.words.includes(currentGuess.join(""))){
+            if(currentRow === 4){
+                setOutOfTurnsFlag(true)
+                setGameOverMessage("Sorry! The word was " + currentWord.join(""))
+            } 
+            updateCellColors(rowValues[currentRow])
+            setCurrentRow(currentRow+1)
+            setCurrentInput(0)
+        }else{
+            setWarnings("Invalid Word Choice")
+        }
+
+
     }
 
     return (
@@ -150,6 +158,9 @@ const Home = () => {
                         formData={formData}
                         updateLetterValue={updateLetterValue}
                         />
+                    <div className="warnings">
+                        {warnings}
+                    </div>                        
                 </div>
                 <div className="col-md">
                 </div>
