@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import backspaceimg from '../backspaceimg.svg'
 
-const Keyboard = ({allLettersTried}) => {
+const Keyboard = ({allLettersTried, setFormData, formData}) => {
     const [rowOne, setRowOne] = useState(["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"])
     const [rowTwo, setRowTwo] = useState(["A", "S", "D", "F", "G", "H", "J", "K", "L"])
     const [rowThree, setRowThree] = useState(["Z", "X", "C", "V", "B", "N", "M"])
@@ -11,8 +11,10 @@ const Keyboard = ({allLettersTried}) => {
     useEffect(() => {
         setValidLetters(allLettersTried.validLetters)
         setInvalidLetters(allLettersTried.invalidLetters)
-        console.log(allLettersTried);
+        // console.log(allLettersTried);
     }, [allLettersTried])
+
+
 
 
     return (

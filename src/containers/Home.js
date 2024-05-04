@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useState, useEffect, useReducer } from "react"
 import GameBoard from "./GameBoard"
 import GameForm from "./GameForm"
-import GameFormRetro from "./GameFormRetro"
 import CurrentMatches from "./CurrentMatches"
-import LettersTried from "./LettersTried"
 import Keyboard from "./Keyboard"
+import { FetchFiveLetterWordsReducer } from "../reducers/FetchFiveLetterWordsReducer"
+import { FetchWords } from "../api/FetchWords"
 
 
 const Home = () => {
@@ -27,18 +27,11 @@ const Home = () => {
         invalidLetters: []
     })
 
-    // useEffect(() => {
-    //     let lettersTriedArray = []
-    //     for(let i=0; i<25; i++){
-    //         lettersTriedArray.push(
-    //             {letter:"", class: "letters-tried"}
-    //         )
-    //     }
-    //     setAllLettersTried(lettersTriedArray)
-    // }, [])
-
     const [currentMatches, setCurrentMatches] = useState(["?", "?", "?", "?", "?"])
-    const [allWords, setAllWords] = useState(["BLADE", "SPIKE", "STRAY", "TRADE"])
+    // const [allWords, setAllWords] = useState(["BLADE", "SPIKE", "STRAY", "TRADE"])
+    const [allWords, dispatchAllWords] = useReducer(
+        FetchFiveLetterWordsReducer, {words: [], isLoading: false, isError: false}
+    )
 
     const [formData, setFormData] = useState({
         letterOne: "",
@@ -49,41 +42,57 @@ const Home = () => {
     })
 
     const [currentRow, setCurrentRow] = useState(0)
-    const [currentWord, setCurrentWord] = useState(["B", "L", "A", "D", "E"])
+    const [currentWord, setCurrentWord] = useState([])
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
     const [gameOverMessage, setGameOverMessage] = useState("")
+
+    useEffect(() => {
+        FetchWords(dispatchAllWords, 5)
+
+    }, [])
+
+    useEffect(() => {
+        console.log(currentWord);
+    }, [currentWord])
+
+    useEffect(() => {
+        console.log(allWords.words);
+        if(allWords.words.length > 0){
+            let randomIndex = Math.floor(Math.random() * allWords.words.length)
+            setCurrentWord(allWords.words[randomIndex].split(""))
+        }
+        
+    }, [allWords])
 
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
         let validLetters = []
         let invalidLetters = []
+        let currentMatchCopy = currentMatches
         let matches = 0;
         for(let i=0; i<currentWord.length; i++){
             if(currentWord[i] === currentGuess[i]){
                 updatedRowClasses[i] = "letter-location-correct"
-                currentMatches[i] = currentGuess[i]
-                validLetters.push(currentGuess[i])
-                // setAllLettersTried({...allLettersTried, validLetters: [...allLettersTried.validLetters, currentGuess[i]]})
+                currentMatchCopy[i] = currentGuess[i]
+                if(!validLetters.includes(currentGuess[i])) validLetters.push(currentGuess[i])
                 matches++;
             }else if(currentWord.includes(currentGuess[i])){
                 updatedRowClasses[i] = "letter-present"
-                // console.log("Letter Present: " + currentGuess[i]);
+                if(!validLetters.includes(currentGuess[i])) validLetters.push(currentGuess[i])
                 validLetters.push(currentGuess[i])
             }else{
-                invalidLetters.push(currentGuess[i])
-                // console.log(allLettersTried);
-                // setAllLettersTried({...allLettersTried, invalidLetters: [...allLettersTried.invalidLetters, currentGuess[i]]})
+                if(!invalidLetters.includes(currentGuess[i])) invalidLetters.push(currentGuess[i])
             }
         }
-        // console.log(validLetters);
+
+        setCurrentMatches(currentMatchCopy)
+
         setAllLettersTried({
             validLetters: [...allLettersTried.validLetters, ...validLetters],
             invalidLetters: [...allLettersTried.invalidLetters, ...invalidLetters]
         
         })
 
-        // setAllLettersTried({...allLettersTried, validLetters: [...allLettersTried.validLetters, ...validLetters]})
-        // setAllLettersTried({...allLettersTried, invalidLetters: [...allLettersTried.invalidLetters, ...invalidLetters]})
         setRowClasses({...rowClasses, [currentRow]: updatedRowClasses})
         if(matches === 5){
             setOutOfTurnsFlag(true)
@@ -95,21 +104,20 @@ const Home = () => {
         e.preventDefault()
         let currentGuess = [formData.letterOne, formData.letterTwo, formData.letterThree, formData.letterFour, formData.letterFive]
 
-
-            setRowValues({...rowValues, [currentRow]: currentGuess})
-            setFormData({
-                letterOne: "",
-                letterTwo: "",
-                letterThree: "",
-                letterFour: "",
-                letterFive: ""
-            })
-            if(currentRow === 4){
-                setOutOfTurnsFlag(true)
-                setGameOverMessage("Sorry! The word was " + currentWord.join(""))
-            } 
-            updateCellColors(currentGuess)
-            setCurrentRow(currentRow+1)
+        setRowValues({...rowValues, [currentRow]: currentGuess})
+        setFormData({
+            letterOne: "",
+            letterTwo: "",
+            letterThree: "",
+            letterFour: "",
+            letterFive: ""
+        })
+        if(currentRow === 4){
+            setOutOfTurnsFlag(true)
+            setGameOverMessage("Sorry! The word was " + currentWord.join(""))
+        } 
+        updateCellColors(currentGuess)
+        setCurrentRow(currentRow+1)
     }
 
     return (
@@ -129,14 +137,16 @@ const Home = () => {
                             handleSubmit={handleSubmit} 
                             setFormData={setFormData} 
                             outOfTurnsFlag={outOfTurnsFlag}
-                            allWords={allWords}
+                            allWords={allWords.words}
                             gameOverMessage={gameOverMessage}
                         />
                 </div>
                 <div className="col-md">
-                    {/* <LettersTried allLettersTried={allLettersTried}/> */}
-                    <Keyboard allLettersTried={allLettersTried}/>
-                    
+                    <Keyboard 
+                        allLettersTried={allLettersTried}
+                        setFormData={setFormData}
+                        formData={formData}
+                        />
                 </div>
             </div>
         </div>
