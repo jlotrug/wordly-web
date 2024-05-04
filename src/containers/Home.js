@@ -124,10 +124,29 @@ const Home = () => {
         }
     }
 
+    const handlePlayAgain = () => {
+        let emptyBoard = {
+            0: ["", "", "", "", "", ""],
+            1: ["", "", "", "", "", ""],
+            2: ["", "", "", "", "", ""],
+            3: ["", "", "", "", "", ""],
+            4: ["", "", "", "", "", ""],
+            5: ["", "", "", "", "", ""],      
+        }
+        setRowClasses(emptyBoard)
+        setRowValues(emptyBoard)
+        setCurrentMatches(["?", "?", "?", "?", "?"])
+        setCurrentRow(0)
+        setCurrentInput(0)
+        setGameOverMessage("")
+        setOutOfTurnsFlag(false)
+        setAllLettersTried({validLetters: [], invalidLetters: []})
+    }
+
     const handleSubmit = (currentGuess) => {
 
         if(allWords.words.includes(currentGuess.join(""))){
-            if(currentRow === 4){
+            if(currentRow === 5){
                 setOutOfTurnsFlag(true)
                 setGameOverMessage("Sorry! The word was " + currentWord.join(""))
             } 
@@ -144,12 +163,12 @@ const Home = () => {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md match-col">
+                <div className="col match-col">
                     <div className="current-matches">
                         <CurrentMatches currentMatches={currentMatches}/>
                     </div>
                 </div>
-                <div className="col-md play-column">
+                <div className="col-6 play-column">
                     <h1>Wordly</h1>
                         <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
                         <Keyboard 
@@ -157,12 +176,17 @@ const Home = () => {
                         setFormData={setFormData}
                         formData={formData}
                         updateLetterValue={updateLetterValue}
+                        outOfTurnsFlag={outOfTurnsFlag}
                         />
+                <div className={outOfTurnsFlag ? "game-over-message" : "hide-content"}>
+                    {gameOverMessage} <br />
+                    <button className="btn play-again-btn" onClick={handlePlayAgain}>Play Again</button>
+                </div>
                     <div className="warnings">
                         {warnings}
                     </div>                        
                 </div>
-                <div className="col-md">
+                <div className="col">
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import backspaceimg from '../backspaceimg.svg'
 
-const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue}) => {
+const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, outOfTurnsFlag}) => {
     const [rowOne, setRowOne] = useState(["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"])
     const [rowTwo, setRowTwo] = useState(["A", "S", "D", "F", "G", "H", "J", "K", "L"])
     const [rowThree, setRowThree] = useState(["Z", "X", "C", "V", "B", "N", "M"])
@@ -23,7 +23,7 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue}) =
 
 
     return (
-        <div className="keyboard-container">
+        <div className={outOfTurnsFlag ? "hide-content" : "keyboard-container"}>
             <div className="keyboard-row krow-1">
                 {rowOne.map((el, index) => {
                     if(validLetters.includes(el)){
