@@ -1,0 +1,16 @@
+.attempts-table{
+    margin: 0 auto;
+    border-collapse:separate;
+    border-spacing: 0 1em;
+}
+
+.attempt-cell{
+    background-color: whitesmoke;
+    height: 70px;
+    width: 70px;
+    border: 1px solid black;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+

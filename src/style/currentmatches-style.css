@@ -1,0 +1,13 @@
+.match-table{
+    border: 2px solid black;
+}
+
+.match-cell{
+    background: rgba(235, 6, 6, 0.15);
+    color: black;
+    height: 80px;
+    width: 80px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}

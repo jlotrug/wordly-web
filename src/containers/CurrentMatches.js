@@ -1,9 +1,6 @@
-
+import '../style/currentmatches-style.css'
 
 const CurrentMatches = ({currentMatches}) => {
-
-
-
     return (
         <table className="match-table">
             <tbody>

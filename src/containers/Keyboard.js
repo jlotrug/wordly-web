@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import backspaceimg from '../backspaceimg.svg'
+import '../style/keyboard-style.css'
 
-const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, outOfTurnsFlag}) => {
-    const [rowOne, setRowOne] = useState(["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"])
-    const [rowTwo, setRowTwo] = useState(["A", "S", "D", "F", "G", "H", "J", "K", "L"])
-    const [rowThree, setRowThree] = useState(["Z", "X", "C", "V", "B", "N", "M"])
+const Keyboard = ({allLettersTried, updateLetterValue, outOfTurnsFlag}) => {
+    const rowOne = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
+    const rowTwo = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
+    const rowThree = ["Z", "X", "C", "V", "B", "N", "M"]
     const [validLetters, setValidLetters] = useState(allLettersTried.validLetters)
     const [invalidLetters, setInvalidLetters] = useState(allLettersTried.invalidLetters)
     const [typedLetter, setTypedLetter] = useState("")
@@ -15,22 +16,9 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, ou
     }, [allLettersTried])
 
     useEffect(() => {
-        // updateLetterValue(typedLetter)
         validateUserInput(typedLetter.toUpperCase())
         setTypedLetter("")
     }, [typedLetter])
-
-    const userTyped = ( e => {
-        // console.log("Reache");
-        setTypedLetter(e.key)
-    })
-
-    const validateUserInput = (userInput) => {
-        if((userInput === "BACKSPACE" || userInput === "ENTER") || (userInput.length === 1 && userInput.match(/[a-z]/i) )){
-            updateLetterValue(userInput)
-        }
-
-    }
 
     useEffect(() => {
         window.addEventListener("keydown", userTyped, false)
@@ -38,16 +26,21 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, ou
         return () => {
             window.removeEventListener("keydown", userTyped, false)
         }
-    },[])
+    },[])    
 
-    const handleLetterSelect = (e) =>{
-        // console.log(e.target.name);
-        // updateLetterValue(e.target.name)
-        setTypedLetter(e.target.name)
+    const userTyped = ( e => {
+        setTypedLetter(e.key)
+    })
+
+    const validateUserInput = (userInput) => {
+        if((userInput === "BACKSPACE" || userInput === "ENTER") || (userInput.length === 1 && userInput.match(/[a-z]/i) )){
+            updateLetterValue(userInput)
+        }
     }
 
-
-
+    const handleLetterSelect = (e) =>{
+        setTypedLetter(e.target.name)
+    }
 
     return (
         <div className={outOfTurnsFlag ? "hide-content" : "keyboard-container"}>

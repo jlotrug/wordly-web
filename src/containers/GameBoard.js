@@ -1,10 +1,10 @@
-import FormRow from './FormRow'
+import '../style/gameboard-style.css'
 
-const GameBoard = ({rowClasses, rowValues,  outOfTurnsFlag}) => {
+const GameBoard = ({rowClasses, rowValues}) => {
 
     return (
         <div className="attempts">
-            <table className="attempt-table">
+            <table className="attempts-table">
                 <tbody>
                     <tr className="table-row">
                         <td className={`attempt-cell ` + rowClasses[0][0]}>{rowValues[0][0]}</td>

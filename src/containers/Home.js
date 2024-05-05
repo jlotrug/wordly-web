@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react"
 import GameBoard from "./GameBoard"
-import GameForm from "./GameForm"
 import CurrentMatches from "./CurrentMatches"
 import Keyboard from "./Keyboard"
 import { FetchFiveLetterWordsReducer } from "../reducers/FetchFiveLetterWordsReducer"
@@ -30,18 +29,9 @@ const Home = () => {
     })
 
     const [currentMatches, setCurrentMatches] = useState(["?", "?", "?", "?", "?"])
-    // const [allWords, setAllWords] = useState(["BLADE", "SPIKE", "STRAY", "TRADE"])
     const [allWords, dispatchAllWords] = useReducer(
         FetchFiveLetterWordsReducer, {words: [], isLoading: false, isError: false}
     )
-
-    const [formData, setFormData] = useState({
-        letterOne: "",
-        letterTwo: "",
-        letterThree: "",
-        letterFour: "",
-        letterFive: ""
-    })
 
     const [currentRow, setCurrentRow] = useState(0)
     const [currentInput, setCurrentInput] = useState(0)
@@ -49,14 +39,11 @@ const Home = () => {
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
     const [gameOverMessage, setGameOverMessage] = useState("")
     const [warnings, setWarnings] = useState("")
-    const [typedLetter, setTypedLetter] = useState("")
 
     useEffect(() => {
         FetchWords(dispatchAllWords, 5)
 
     }, [])
-
-
 
     useEffect(() => {
         updateCurrentWord()
@@ -163,8 +150,6 @@ const Home = () => {
         }else{
             setWarnings("Invalid Word Choice")
         }
-
-
     }
 
     return (
@@ -179,11 +164,9 @@ const Home = () => {
                     <h1 className="game-title">Wordly</h1>
                         <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
                         <Keyboard 
-                        allLettersTried={allLettersTried}
-                        setFormData={setFormData}
-                        formData={formData}
-                        updateLetterValue={updateLetterValue}
-                        outOfTurnsFlag={outOfTurnsFlag}
+                            allLettersTried={allLettersTried}
+                            updateLetterValue={updateLetterValue}
+                            outOfTurnsFlag={outOfTurnsFlag}
                         />
                 <div className={outOfTurnsFlag ? "game-over-message" : "hide-content"}>
                     {gameOverMessage} <br />
