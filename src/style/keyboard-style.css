@@ -64,12 +64,3 @@ button.spec-key:active{
     background-color: green;
 }
 
-td.letter-location-correct{
-    background-color: forestgreen;
-    /* color: whitesmoke; */
-}
-
-td.letter-present{
-    background-color: goldenrod;
-    /* color: whitesmoke; */
-}
