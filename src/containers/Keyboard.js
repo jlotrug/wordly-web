@@ -7,16 +7,43 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, ou
     const [rowThree, setRowThree] = useState(["Z", "X", "C", "V", "B", "N", "M"])
     const [validLetters, setValidLetters] = useState(allLettersTried.validLetters)
     const [invalidLetters, setInvalidLetters] = useState(allLettersTried.invalidLetters)
+    const [typedLetter, setTypedLetter] = useState("")
 
     useEffect(() => {
         setValidLetters(allLettersTried.validLetters)
         setInvalidLetters(allLettersTried.invalidLetters)
-        // console.log(allLettersTried);
     }, [allLettersTried])
+
+    useEffect(() => {
+        // updateLetterValue(typedLetter)
+        validateUserInput(typedLetter.toUpperCase())
+        setTypedLetter("")
+    }, [typedLetter])
+
+    const userTyped = ( e => {
+        // console.log("Reache");
+        setTypedLetter(e.key)
+    })
+
+    const validateUserInput = (userInput) => {
+        if((userInput === "BACKSPACE" || userInput === "ENTER") || (userInput.length === 1 && userInput.match(/[a-z]/i) )){
+            updateLetterValue(userInput)
+        }
+
+    }
+
+    useEffect(() => {
+        window.addEventListener("keydown", userTyped, false)
+
+        return () => {
+            window.removeEventListener("keydown", userTyped, false)
+        }
+    },[])
 
     const handleLetterSelect = (e) =>{
         // console.log(e.target.name);
-        updateLetterValue(e.target.name)
+        // updateLetterValue(e.target.name)
+        setTypedLetter(e.target.name)
     }
 
 
@@ -47,7 +74,7 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, ou
                 })}
             </div>
             <div className="keyboard-row krow-3">
-                <button onClick={handleLetterSelect} name="Enter" className="keyboard-key spec-key"> Enter </button>
+                <button onClick={handleLetterSelect} name="ENTER" className="keyboard-key spec-key"> Enter </button>
                  {rowThree.map((el, index) => {
                     if(validLetters.includes(el)){
                         return <button key={index} onClick={handleLetterSelect} name={el} className='keyboard-key letter-p'>{el}</button>
@@ -57,7 +84,7 @@ const Keyboard = ({allLettersTried, setFormData, formData, updateLetterValue, ou
                         return <button key={index} onClick={handleLetterSelect} name={el} className='keyboard-key'>{el}</button>
                     }
                 })}
-                 <button onClick={handleLetterSelect} name="Delete" className="keyboard-key spec-key"> <img name="Delete" src={backspaceimg} alt="" width="30px" height="27px"/> </button>
+                 <button onClick={handleLetterSelect} name="BACKSPACE" className="keyboard-key spec-key"> <img name="Delete" src={backspaceimg} alt="" width="30px" height="27px"/> </button>
             </div>            
         </div>
        

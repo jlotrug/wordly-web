@@ -49,19 +49,26 @@ const Home = () => {
     const [outOfTurnsFlag, setOutOfTurnsFlag] = useState(false)
     const [gameOverMessage, setGameOverMessage] = useState("")
     const [warnings, setWarnings] = useState("")
+    const [typedLetter, setTypedLetter] = useState("")
 
     useEffect(() => {
         FetchWords(dispatchAllWords, 5)
 
     }, [])
 
+
+
     useEffect(() => {
+        updateCurrentWord()
+        
+    }, [allWords])
+
+    const updateCurrentWord = () => {
         if(allWords.words.length > 0){
             let randomIndex = Math.floor(Math.random() * allWords.words.length)
             setCurrentWord(allWords.words[randomIndex].split(""))
         }
-        
-    }, [allWords])
+    }
 
     const updateCellColors = (currentGuess) => {
         let updatedRowClasses = ["","","","",""]
@@ -100,17 +107,15 @@ const Home = () => {
     }
 
     const updateLetterValue = (letter) => {
-        console.log(currentInput);
         let currentGuess = rowValues[currentRow]
-        if(letter === "Delete"){
+        if(letter === "BACKSPACE"){
             setWarnings("")
             if(currentInput > 0){
                 setCurrentInput(currentInput-1)
                 currentGuess[currentInput-1] = ""
                 setRowValues({...rowValues, [currentRow]: currentGuess})
             }
-        }else if(letter === "Enter"){
-            console.log("Enter Reached");
+        }else if(letter === "ENTER"){
             if(rowValues[currentRow][4] !== ""){
                 handleSubmit(currentGuess)
             }
@@ -141,6 +146,8 @@ const Home = () => {
         setGameOverMessage("")
         setOutOfTurnsFlag(false)
         setAllLettersTried({validLetters: [], invalidLetters: []})
+        updateCurrentWord()
+        
     }
 
     const handleSubmit = (currentGuess) => {
@@ -169,7 +176,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="col-6 play-column">
-                    <h1>Wordly</h1>
+                    <h1 className="game-title">Wordly</h1>
                         <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
                         <Keyboard 
                         allLettersTried={allLettersTried}
