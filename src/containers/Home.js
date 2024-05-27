@@ -148,7 +148,7 @@ const Home = () => {
             setCurrentRow(currentRow+1)
             setCurrentInput(0)
         }else{
-            setWarnings("Invalid Word Choice")
+            !allWords.length ? setWarnings("Word dictionary could not be fetched") : setWarnings("Invalid Word Choice")
         }
     }
 

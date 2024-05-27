@@ -16,84 +16,22 @@
 
 td.letter-location-correct{
     background-color: forestgreen;
-    animation: test-an 1s linear;
-    /* animation-name: location-correct-transition;
-    animation-duration: 2s; */
-    /* color: whitesmoke; */
+    animation: submit-transition 1s linear;
 }
 
 td.letter-present{
     background-color: goldenrod;
-    /* transform: rotateX(90deg); */
-    /* transform-origin: top; */
-    /* writing-mode: vertical-lr; */
-    /* transform: rotatex(360deg); */
-    animation: test-an 1s linear;
-    /* transform: rotateX(360deg); */
-    /* transform: rotate3d(-0.3), 1, 0, 30deg; */
-    /* animation: test-an 1s infinite; */
-    /* transform-origin: top;
-    transition: transform .5s;
-    transform: rotate(360deg); */
-    /* animation: 2s flip 5s infinite linear; */
-    /* color: whitesmoke; */
+    animation: submit-transition 1s linear;
+
 }
 
-@keyframes location-correct-transition {
-    0% {
-        /* background-color: whitesmoke; */
-        transform: rotateX(180deg);
-        color: whitesmoke;
-        background-color: whitesmoke;
-        font-size: 0;
-        /* display: none; */
-        /* text-indent: 100%; */
-        
-    }
-    50%{
 
-        /* color: ; */
-    }
-    /* from {
-        background-color: whitesmoke;
-    }
-    to {background-color: forestgreen;} */
-    
-}
 
-@keyframes test-an {
+@keyframes submit-transition {
     0% {
-        /* background-color: whitesmoke; */
         transform: rotateX(180deg);
-        color: whitesmoke;
-        background-color: whitesmoke;
         font-size: 0;
-        
     }
-    50%{
-        font-size: 0
-    }
-    /* 100% { */
-        /* background-color: forestgreen; */
-        /* transform: rotateX(360deg); */
-    /* } */
-    /* 0%{ */
-        /* color: whitesmoke; */
-        /* background-color: whitesmoke; */
-        /* height: 2px; */
-        /* writing-mode: vertical-rl; */
-    /* } */
-    /* 100%{ */
-        /* height: 10px; */
-        /* transform: rotateX(-360deg); */
-        /* writing-mode: vertical-rl; */
-        /* color: black; */
-        /* color: goldenrod; */
-        /* transform: rotate3d(-0.3, 1, 0, 390deg); */
-    /* } */
-    /* 50%{
-        transform: rotateX(180deg);
-    } */
     
 }
 

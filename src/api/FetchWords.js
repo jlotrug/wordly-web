@@ -35,5 +35,7 @@ const getUrl = (num) => {
     switch(num){
         case 5:
             return process.env.REACT_APP_FIVELETTERWORDS_URL
+        default:
+            return process.env.REACT_APP_FIVELETTERWORDS_URL
     }
 }
