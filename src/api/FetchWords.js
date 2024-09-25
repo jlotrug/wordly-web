@@ -3,7 +3,7 @@ import axios from "axios"
 export const FetchWords = async(dispatchFunction, wordLength) => {
     let url = getUrl(wordLength)
 
-    dispatchFunction({type: 'FETCH_WORDS_INIT'})
+    dispatchFunction({type: 'FETCH_WORDS_INIT'}) 
 
     try{
         const result = await axios.get(url)
