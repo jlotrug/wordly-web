@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const FetchWords = async(dispatchFunction, wordLength) => {
     let url = getUrl(wordLength)
-
+console.log(process.env.REACT_APP_FIVELETTERWORDS_URL);
     dispatchFunction({type: 'FETCH_WORDS_INIT'}) 
 
     try{
