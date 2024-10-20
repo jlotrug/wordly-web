@@ -148,7 +148,8 @@ const Home = () => {
             setCurrentRow(currentRow+1)
             setCurrentInput(0)
         }else{
-            !allWords.length ? setWarnings("Word dictionary could not be fetched") : setWarnings("Invalid Word Choice")
+            // console.log(allWords);
+            !allWords.words.length ? setWarnings("Word dictionary could not be fetched") : setWarnings("Invalid Word Choice")
         }
     }
 
@@ -163,6 +164,9 @@ const Home = () => {
                 <div className="col-6 play-column">
                     <h1 className="game-title">Wordly</h1>
                         <GameBoard rowClasses={rowClasses} rowValues={rowValues} />
+                        <div className="warnings">
+                            {warnings}
+                        </div>   
                         <Keyboard 
                             allLettersTried={allLettersTried}
                             updateLetterValue={updateLetterValue}
@@ -172,9 +176,9 @@ const Home = () => {
                     {gameOverMessage} <br />
                     <button className="btn play-again-btn" onClick={handlePlayAgain}>Play Again</button>
                 </div>
-                    <div className="warnings">
+                    {/* <div className="warnings">
                         {warnings}
-                    </div>                        
+                    </div>                         */}
                 </div>
                 <div className="col">
                 </div>
