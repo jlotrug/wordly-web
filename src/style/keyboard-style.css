@@ -115,21 +115,21 @@ button.spec-key:active{
         /* height: 150px */
     }
 
-    .keyboard-key:active{
+    /* .keyboard-key:active{
         width: 40px;
         height: 40px;
         font-size: 16px;
-    }
+    } */
     
     button.spec-key:active{
         /* font-size: 20px; */
-        width: 14%;
+        /* width: 40px; */
         /* color: white; */
     }
 
     .spec-key{
-        width: 12%;
-        /* padding: 0; */
+        width: 50px;
+        padding: 0;
     }
 
     .letter-np{
