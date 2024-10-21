@@ -154,8 +154,8 @@ const Home = () => {
     }
 
     return (
-        <div className="container">
-            <div className="row">
+        <div className="container full-play-area">
+            <div className="row ">
                 <div className="col match-col">
                     <div className="current-matches">
                         <CurrentMatches currentMatches={currentMatches}/>

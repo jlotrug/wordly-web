@@ -2,6 +2,7 @@
     margin: 0 auto;
     border-collapse:separate;
     border-spacing: 0 1em;
+    /* border: 1px solid black; */
 }
 
 .attempt-cell{
@@ -35,6 +36,38 @@ td.letter-present{
     
 }
 
+@media screen and (max-width: 500px){
+    .attempts-table{
+        margin: 0 auto;
+        border-collapse:separate;
+        border-spacing: 0 1em;
+        /* border: 1px solid black; */
+    }
+    
+    .attempt-cell{
+        background-color: whitesmoke;
+        height: 30px;
+        width: 30px;
+        border: 1px solid black;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    td.letter-location-correct{
+        background-color: forestgreen;
+        animation: submit-transition 1s linear;
+    }
+    
+    td.letter-present{
+        background-color: goldenrod;
+        animation: submit-transition 1s linear;
+    
+    }
 
+    .table-row{
+        margin: 0;
+    }
+}
 
 

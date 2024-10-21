@@ -1,16 +1,4 @@
-@media screen and (max-width: 500px){
-    .match-col{
-        display: none;
-    }
-    .right-col{
-        display: none;
 
-    }
-
-    .play-column{
-        text-align: center;
-    }
-}
 
 
 
@@ -73,7 +61,32 @@ button.play-again-btn:hover{
 }
 
 
+@media screen and (max-width: 500px){
+    .match-col{
+        display: none;
+    }
+    .right-col{
+        display: none;
+        background-color: red;
 
+    }
+
+    .play-column{
+        text-align: center;
+        margin: auto;
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    .full-play-area{
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid black; */
+        /* text-align: center;
+        background-color: red; */
+        
+    }
+}
 
 
 
