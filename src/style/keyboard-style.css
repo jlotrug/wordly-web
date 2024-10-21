@@ -115,9 +115,29 @@ button.spec-key:active{
         /* height: 150px */
     }
 
+    .keyboard-key:active{
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    button.spec-key:active{
+        /* font-size: 20px; */
+        width: 14%;
+        /* color: white; */
+    }
+
     .spec-key{
-        width: 11%;
+        width: 12%;
         /* padding: 0; */
+    }
+
+    .letter-np{
+        background-color: red;
+    }
+    
+    .letter-p{
+        background-color: green;
     }
 
 }
