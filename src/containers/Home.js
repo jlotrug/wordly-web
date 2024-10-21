@@ -180,7 +180,7 @@ const Home = () => {
                         {warnings}
                     </div>                         */}
                 </div>
-                <div className="col">
+                <div className="col right-col">
                 </div>
             </div>
         </div>
