@@ -86,6 +86,12 @@ button.play-again-btn:hover{
         background-color: red; */
         
     }
+
+    .warnings{
+        margin-top: 1px;
+        font-size: 12px;
+        color: rgb(234, 63, 63);
+    }
 }
 
 
