@@ -39,6 +39,7 @@ const Keyboard = ({allLettersTried, updateLetterValue, outOfTurnsFlag}) => {
     }
 
     const handleLetterSelect = (e) =>{
+        console.log("Hello");
         setTypedLetter(e.target.name)
     }
 
@@ -77,7 +78,9 @@ const Keyboard = ({allLettersTried, updateLetterValue, outOfTurnsFlag}) => {
                         return <button key={index} onClick={handleLetterSelect} name={el} className='keyboard-key'>{el}</button>
                     }
                 })}
-                 <button onClick={handleLetterSelect} name="BACKSPACE" className="keyboard-key spec-key"> <img name="Delete" src={backspaceimg} alt="" width="30px" height="27px"/> </button>
+                 <button onClick={handleLetterSelect}    name="BACKSPACE" className="keyboard-key spec-key">
+                     <img onClick={handleLetterSelect} name="BACKSPACE" className='im-btn'  src={backspaceimg} alt="" width="30px" height="27px"/>
+                </button>
             </div>            
         </div>
        

@@ -6,6 +6,8 @@
     margin-bottom: 5px;
 }
 
+
+
 .keyboard-key{
     background-color: white; 
     font-family:Georgia, 'Times New Roman', Times, serif;
@@ -30,41 +32,54 @@
     font-size: 23px;
 }
 
-button.spec-key:active{
-    /* font-size: 20px; */
-    width: 75px;
-    /* color: white; */
+
+button.spec-key:active{ 
+    font-size: 20px; 
+    width: 75px; 
+    color: white;
+    
+    
 }
 
 .spec-key{
     width: 65px;
+    padding: 0;
+}
+/* .spec-key{
+    width: 65px;
+    border: 1px solid green;
+    padding: 0;
+} */
+
+.spec-key{
+    /* height: 100%; */
+    /* width: 65px; */
+    /* height: 55px; */
+    /* border: 1px solid blue; */
+    background-color: white; 
     /* padding: 0; */
 }
 
 .keyboard-container{
     text-align: center;
     margin: 1%;
-    /* border: 5px solid black; */
     width: 100%;
     /* height: 150px */
 }
 
-.keyboard-key:active{
+/* .keyboard-key:active{
     width: 55px;
     height: 55px;
     font-size: 23px;
-}
+} */
 
-button.spec-key:active{
+/* button.spec-key:active{ */
     /* font-size: 20px; */
-    width: 75px;
+    /* width: 75px; */
     /* color: white; */
-}
+/* } */
 
-.spec-key{
-    width: 65px;
-    /* padding: 0; */
-}
+
 
 
 .keyboard-table {
